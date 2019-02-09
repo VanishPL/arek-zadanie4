@@ -1,3 +1,7 @@
+
+
+import com.sun.org.apache.xml.internal.serializer.utils.Utils;
+
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
@@ -13,12 +17,14 @@ public class Notepad extends JFrame {
 
     private static final long serialVersionUID = 1L;
     JFrame frame;
+    JPanel statusBar;
     JMenuBar menuBar;
     JMenu file;
     JMenu edit;
     JMenuItem open, newFile,save, exit;
     JMenuItem undo,paste, selectAll ;
     JMenu format;
+    JMenuItem font,colorChange;
     JMenu help;
     JFileChooser fileChooser;
     JTextArea textArea;
@@ -40,13 +46,15 @@ public class Notepad extends JFrame {
         undo = new  JMenuItem("Undo                 Ctrl+Z");
         paste = new JMenuItem("Paste                Ctrl+V");
         selectAll = new JMenuItem("Select All       Ctrl+A ");
+        font = new JMenuItem("Change font");
+        colorChange = new JMenuItem("Change color of area");
+
         textArea = new JTextArea();
         textArea.setLineWrap(true);
-        scrollArea = new JScrollPane(textArea);
+        scrollArea = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         fileChooser = new JFileChooser();
         menuBar = new JMenuBar();
         ns = new BorderLayout();
-
 
 
         frame.setLayout(ns);
@@ -64,17 +72,23 @@ public class Notepad extends JFrame {
         menuBar.add(edit);
         menuBar.add(format);
         menuBar.add(help);
+        format.add(font);
+        format.add(colorChange);
 
         frame.setJMenuBar(menuBar); //zdefiniowanie JMenuBar
+        fileChooser.addChoosableFileFilter(new TextFilter());
+        fileChooser.setAcceptAllFileFilterUsed(false);
 
         OpenListener openL = new OpenListener(); // zdefiniowanie i ustawienie nasluchiwaczy
         NewListener NewL = new NewListener();
         SaveListener saveL = new SaveListener();
         ExitListener exitL = new ExitListener();
+        ChangeFont changeL = new ChangeFont();
         open.addActionListener(openL);
         newFile.addActionListener(NewL);
         save.addActionListener(saveL);
         exit.addActionListener(exitL);
+        font.addActionListener(changeL);
         //UndoListener UndoL = new UndoListener();
         PasteListener pasteL = new PasteListener(); // ustawienie nasluchiwacza wklejenia z clipboard
         //EditListener EditL = new EditListener();
@@ -86,11 +100,12 @@ public class Notepad extends JFrame {
         frame.setVisible(true);
     }
 
+
     class OpenListener implements ActionListener { // nasluchwiacz otwarcia
         public void actionPerformed(ActionEvent e) {
             if (JFileChooser.APPROVE_OPTION == fileChooser.showOpenDialog(frame)) {
                 File file = fileChooser.getSelectedFile();
-                if(file.getName().endsWith(".txt")) { //sprawdzenie czy jest rozszerzenie txt
+                //sprawdzenie czy jest rozszerzenie txt
                     textArea.setText("");
                     Scanner in = null;
                     try {
@@ -104,7 +119,7 @@ public class Notepad extends JFrame {
                     } finally {
                         in.close();
                     }
-                }
+
             }
         }
     }
@@ -114,7 +129,6 @@ public class Notepad extends JFrame {
             if (JFileChooser.APPROVE_OPTION == fileChooser.showSaveDialog(frame)) {
                 File file = fileChooser.getSelectedFile();
                 PrintWriter out = null;
-                if(!file.getName().endsWith(".txt")) file //sprawdzenie czy jest rozszerzenie txt
                 try {
                     out = new PrintWriter(file);
                     String output = textArea.getText();
@@ -137,6 +151,7 @@ public class Notepad extends JFrame {
                 }
             }
         }
+
     }
 
     class NewListener implements ActionListener {
@@ -170,6 +185,52 @@ public class Notepad extends JFrame {
                 System.out.println("not string flavour");
             }
 
+        }
+    }
+
+    class ChangeFont implements ActionListener {
+        JButton colorButton, button2;
+        JComboBox<String> nes;
+        JFrame chan;
+        String fonts[] =
+                GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+        SpinnerNumberModel model1 = new SpinnerNumberModel(12, 0, 60, 1);
+        JSpinner size;
+        JRadioButton radioButton;
+        public void actionPerformed(ActionEvent e){
+            GridLayout gird = new GridLayout(2,2);
+
+            chan = new JFrame("CHANGE FONT");
+            colorButton = new JButton("Change color");
+            nes = new JComboBox<>(fonts);
+            size = new JSpinner(model1);
+            radioButton = new JRadioButton("Bold");
+
+            frame.setEnabled(false);
+
+
+            chan.setLocation(getX()+100, getY()+100); // ustawianie kraftowego okna dialogowego
+            chan.setSize(400, 200);
+            chan.setVisible(true);
+            chan.setLayout(gird);
+            chan.addWindowListener(new WA());
+
+
+            chan.add(nes);
+            chan.add(colorButton);
+            chan.add(size);
+            chan.add(radioButton);
+
+            radioButton.addActionListener();
+
+            //Color newColor = JColorChooser.showDialog(textArea, "Choose Background", textArea.getBackground());
+        }
+
+        class WA extends WindowAdapter {
+            public void windowClosing(WindowEvent e){
+                setVisible(false);
+                frame.setEnabled(true);
+            }
         }
     }
 
