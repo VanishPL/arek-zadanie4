@@ -46,7 +46,7 @@ public class Notepad extends JFrame {
         statusBar = new JPanel(new GridLayout(1,2));
         countWords = new JTextField();
         statusBarText = new JTextField();
-        countWords.setText("Words: ");
+        countWords.setText("Symbols: ");
         statusBar.add(statusBarText);
         statusBar.add(countWords);
         frame = new JFrame("Notepad Application");
@@ -133,7 +133,7 @@ public class Notepad extends JFrame {
 
         @Override
         public void caretUpdate(CaretEvent e) {
-            countWords.setText("Words: " + String.valueOf(textArea.getText().split(" ").length));
+            countWords.setText("Words: " + String.valueOf(textArea.getText().length()));
         }
     }
 
