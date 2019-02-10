@@ -25,14 +25,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="3870" />
-          <entry key="txt" value="224" />
+          <entry key="java" value="5239" />
+          <entry key="txt" value="265" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="3870" />
-          <entry key="PLAIN_TEXT" value="224" />
+          <entry key="JAVA" value="5239" />
+          <entry key="PLAIN_TEXT" value="265" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -52,10 +52,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Notepad.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1959">
-              <caret line="269" column="118" selection-start-line="269" selection-start-column="118" selection-end-line="269" selection-end-column="118" />
+            <state relative-caret-position="437">
+              <caret line="329" column="16" selection-start-line="329" selection-start-column="16" selection-end-line="329" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#11301#11302#0" expanded="true" />
+                <element signature="e#11340#11341#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -64,7 +66,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/TextFilter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
+            <state relative-caret-position="323">
               <caret line="19" column="55" selection-start-line="19" selection-start-column="55" selection-end-line="19" selection-end-column="55" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -76,8 +78,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Utils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="36" selection-start-line="36" selection-end-line="36" />
+            <state relative-caret-position="136">
+              <caret line="37" column="20" selection-start-line="37" selection-start-column="20" selection-end-line="37" selection-end-column="20" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -94,6 +99,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>textArea</find>
+      <find>file</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -142,7 +148,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549796305001" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549801987798" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop/Nowy folder/components-FileChooserDemo2Project" />
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.0" />
@@ -250,7 +256,14 @@
       <option name="project" value="LOCAL" />
       <updated>1549795314647</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Dodano zmiane koloru czcionki oraz tla.">
+      <created>1549796593874</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1549796593874</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -293,14 +306,15 @@
     <MESSAGE value="Dodano zawijanie i przewijanie tekstu." />
     <MESSAGE value="Dodano zmiane czcionki jej rozmiaru i stylu" />
     <MESSAGE value="Zrefakturyzwano kod. Klasa ChangeFamily nie istnieje." />
-    <option name="LAST_COMMIT_MESSAGE" value="Zrefakturyzwano kod. Klasa ChangeFamily nie istnieje." />
+    <MESSAGE value="Dodano zmiane koloru czcionki oraz tla." />
+    <option name="LAST_COMMIT_MESSAGE" value="Dodano zmiane koloru czcionki oraz tla." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Main.java" />
-    <entry file="file://$PROJECT_DIR$/src/Notepad.java">
+    <entry file="file://$PROJECT_DIR$/src/Utils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1959">
-          <caret line="269" column="118" selection-start-line="269" selection-start-column="118" selection-end-line="269" selection-end-column="118" />
+        <state relative-caret-position="136">
+          <caret line="37" column="20" selection-start-line="37" selection-start-column="20" selection-end-line="37" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -309,7 +323,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/TextFilter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
+        <state relative-caret-position="323">
           <caret line="19" column="55" selection-start-line="19" selection-start-column="55" selection-end-line="19" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -317,10 +331,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Utils.java">
+    <entry file="file://$PROJECT_DIR$/src/Notepad.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
+        <state relative-caret-position="437">
+          <caret line="329" column="16" selection-start-line="329" selection-start-column="16" selection-end-line="329" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#11301#11302#0" expanded="true" />
+            <element signature="e#11340#11341#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

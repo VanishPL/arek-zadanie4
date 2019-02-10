@@ -9,6 +9,7 @@ import java.awt.datatransfer.Transferable;
 import java.awt.event.*;
 import java.awt.geom.AffineTransform;
 import java.io.File;
+import java.io.FileFilter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -24,7 +25,7 @@ public class Notepad extends JFrame {
     JMenu file;
     JMenu edit;
     JMenuItem open, newFile,save, exit;
-    JMenuItem undo,paste, selectAll ;
+    JMenuItem undo,paste, selectAll, find;
     JMenu format;
     JMenuItem font,colorChange;
     JMenu help;
@@ -50,6 +51,7 @@ public class Notepad extends JFrame {
         paste = new JMenuItem("Paste                Ctrl+V");
         selectAll = new JMenuItem("Select All       Ctrl+A ");
         font = new JMenuItem("Change font");
+        find = new JMenuItem("Find      Ctrl+F");
         colorChange = new JMenuItem("Change color of area");
 
         textArea = new JTextArea();
@@ -71,6 +73,7 @@ public class Notepad extends JFrame {
         edit.add(undo);
         edit.add(paste);
         edit.add(selectAll);
+        edit.add(find);
         menuBar.add(file);
         menuBar.add(edit);
         menuBar.add(format);
@@ -88,12 +91,14 @@ public class Notepad extends JFrame {
         ExitListener exitL = new ExitListener();
         ChangeFont changeL = new ChangeFont();
         ChangeColor changeC = new ChangeColor();
+        FindWord findL = new FindWord();
         open.addActionListener(openL);
         newFile.addActionListener(NewL);
         save.addActionListener(saveL);
         exit.addActionListener(exitL);
         font.addActionListener(changeL);
         colorChange.addActionListener(changeC);
+        find.addActionListener(findL);
         //UndoListener UndoL = new UndoListener();
         PasteListener pasteL = new PasteListener(); // ustawienie nasluchiwacza wklejenia z clipboard
         //EditListener EditL = new EditListener();
@@ -135,10 +140,12 @@ public class Notepad extends JFrame {
                 File file = fileChooser.getSelectedFile();
                 PrintWriter out = null;
                 try {
-                    out = new PrintWriter(file);
+                    if(!fileChooser.accept(file)) out = new PrintWriter(file + ".txt");
+                    else out = new PrintWriter(file); //zawsze zwracaj plik z rozszerzeniem txt
                     String output = textArea.getText();
                     System.out.println(output);
                     out.println(output);
+
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 } finally {
@@ -268,6 +275,67 @@ public class Notepad extends JFrame {
     class ChangeColor implements ActionListener {
         public void actionPerformed(ActionEvent e){
             textArea.setBackground(JColorChooser.showDialog(textArea, "Choose Background", textArea.getBackground()));
+        }
+    }
+
+    class FindWord implements ActionListener {
+        JFrame chan;
+        JPanel comboPane, accCan;
+        JTextArea textField;
+        JButton acceptButton, cancelButton;
+        public void actionPerformed(ActionEvent e){
+            GridLayout gird = new GridLayout(2,1);
+            GridLayout gird1 = new GridLayout(1,2);
+            GridLayout gird2 = new GridLayout(1,1);
+            chan = new JFrame("FIND WORD");
+            comboPane = new JPanel();
+            acceptButton = new JButton("Accept");
+            cancelButton = new JButton("Cancel");
+            textField = new JTextArea();
+            textField.setLineWrap(true);
+
+            gird2.setVgap(20);
+            comboPane.setLayout(gird2);
+            comboPane.add(textField);
+
+            //gird.setVgap(20);
+            accCan = new JPanel();
+            accCan.setLayout(gird1);
+            accCan.add(acceptButton);
+            accCan.add(cancelButton);
+
+            chan.setLocation(getX()+100, getY()+100); // ustawianie kraftowego okna dialogowego i jego rozmieszczenia
+            chan.setSize(400, 200);
+            chan.setVisible(true);
+            chan.setLayout(gird);
+            chan.addWindowListener(new WA()); //obsluga zdarzenia zamkniecia okna
+
+            chan.add(comboPane);
+            chan.add(accCan);
+
+            acceptButton.addActionListener(new Accept());
+            cancelButton.addActionListener(new Cancel());
+        }
+
+        class WA extends WindowAdapter {
+            public void windowClosing(WindowEvent e){
+                setVisible(false);
+                frame.setEnabled(true);
+            }
+        }
+
+        class Accept implements ActionListener {
+            public void actionPerformed(ActionEvent e){
+                String temp = textField.getText();
+
+                new WA();
+            }
+        }
+
+        class Cancel implements ActionListener {
+            public void actionPerformed(ActionEvent e){
+                new WA();
+            }
         }
     }
 
