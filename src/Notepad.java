@@ -34,11 +34,17 @@ public class Notepad extends JFrame {
     JFileChooser fileChooser;
     JTextArea textArea;
     JScrollPane scrollArea;
-    Clipboard clip ;
     BorderLayout ns;
     Font fontS;
+    JTextField statusBarText;
+    final Clipboard clipboard =
+            Toolkit.getDefaultToolkit().getSystemClipboard();
 
     Notepad() {
+        statusBar = new JPanel(new GridLayout(1,1));
+
+        statusBarText = new JTextField();
+        statusBar.add(statusBarText);
         frame = new JFrame("Notepad Application");
         file = new JMenu("File");
         edit = new JMenu("Edit");
@@ -67,6 +73,7 @@ public class Notepad extends JFrame {
         frame.setLayout(ns);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(scrollArea);
+        frame.add(statusBar, BorderLayout.PAGE_END);
 
         file.add(open); //zdefiniowanie JMenu'sów
         file.add(newFile);
@@ -86,7 +93,6 @@ public class Notepad extends JFrame {
         frame.setJMenuBar(menuBar); //zdefiniowanie JMenuBar
         fileChooser.addChoosableFileFilter(new TextFilter());
         fileChooser.setAcceptAllFileFilterUsed(false);
-
         OpenListener openL = new OpenListener(); // zdefiniowanie i ustawienie nasluchiwaczy
         NewListener NewL = new NewListener();
         SaveListener saveL = new SaveListener();
@@ -95,6 +101,8 @@ public class Notepad extends JFrame {
         ChangeColor changeC = new ChangeColor();
         FindWord findL = new FindWord();
         SelectAllListener selectAllL = new SelectAllListener();
+        PasteListener pasteL = new PasteListener(); // ustawienie nasluchiwacza wklejenia z clipboard
+
         open.addActionListener(openL);
         newFile.addActionListener(NewL);
         save.addActionListener(saveL);
@@ -103,12 +111,14 @@ public class Notepad extends JFrame {
         colorChange.addActionListener(changeC);
         find.addActionListener(findL);
         selectAll.addActionListener(selectAllL);
+        paste.addActionListener(pasteL);
         //UndoListener UndoL = new UndoListener();
-        PasteListener pasteL = new PasteListener(); // ustawienie nasluchiwacza wklejenia z clipboard
+
         //EditListener EditL = new EditListener();
         //SelectListener SelectL = new SelectListener();
         //undo.addActionListener(UndoL);
         //paste.addActionListener(EditL);
+        statusBarText.setText("New Notepad");
         frame.setSize(800, 600);
         frame.setVisible(true);
     }
@@ -117,6 +127,7 @@ public class Notepad extends JFrame {
         public void actionPerformed(ActionEvent e){
             textArea.setSelectionStart(0);
             textArea.setSelectionEnd(textArea.getText().length());
+            statusBarText.setText("Selected all");
         }
     }
 
@@ -134,6 +145,7 @@ public class Notepad extends JFrame {
                             String line = in.nextLine();
                             textArea.append(line + "\n"); //wczytanie calego pliku do JTextArea
                         }
+                        statusBarText.setText("Opened file");
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     } finally {
@@ -153,9 +165,8 @@ public class Notepad extends JFrame {
                     if(!fileChooser.accept(file)) out = new PrintWriter(file + ".txt");
                     else out = new PrintWriter(file); //zawsze zwracaj plik z rozszerzeniem txt
                     String output = textArea.getText();
-                    System.out.println(output);
                     out.println(output);
-
+                    statusBarText.setText("Directory of saved file:  " + file.getAbsolutePath());
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 } finally {
@@ -181,7 +192,7 @@ public class Notepad extends JFrame {
             textArea.setText("");
             //frame.add(newFile);
             //textArea.(newFile+"\n");
-
+            statusBarText.setText("Created new file");
 
 
         }
@@ -196,11 +207,12 @@ public class Notepad extends JFrame {
 
     class PasteListener implements ActionListener { // nasluchiwacz wklejania
         public void actionPerformed(ActionEvent e) {
-            Transferable cliptran = clip.getContents(Notepad.this);
+            Transferable cliptran = clipboard.getContents(clipboard);
             try
             {
                 String sel = (String) cliptran.getTransferData(DataFlavor.stringFlavor); //program posiada kopie clipboard
                 textArea.replaceRange(sel,textArea.getSelectionStart(),textArea.getSelectionEnd()); //program zamienia zaznaczony tekst na kopie z clipboard
+                statusBarText.setText("Pasted clipboard to file");
             }
             catch(Exception exc)
             {
@@ -211,7 +223,7 @@ public class Notepad extends JFrame {
     }
 
     class ChangeFont implements ActionListener {
-        JButton colorButton, button2;
+        JButton colorButton;
         JComboBox<String> nes;
         JFrame chan;
         String fonts[] =
@@ -258,6 +270,7 @@ public class Notepad extends JFrame {
             public void windowClosing(WindowEvent e){
                 setVisible(false);
                 fontS = new Font(fonts[nes.getSelectedIndex()], fontStyle, model1.getNumber().intValue());
+                statusBarText.setText("Changed font");
                 textArea.setFont(fontS);
                 textArea.setForeground(newColor);
                 frame.setEnabled(true);
@@ -285,6 +298,7 @@ public class Notepad extends JFrame {
     class ChangeColor implements ActionListener {
         public void actionPerformed(ActionEvent e){
             textArea.setBackground(JColorChooser.showDialog(textArea, "Choose Background", textArea.getBackground()));
+            statusBarText.setText("Changed color of background");
         }
     }
 
@@ -346,7 +360,8 @@ public class Notepad extends JFrame {
                     if(n.contains(temp)){
                          System.out.println(n.indexOf(temp));
                         try {
-                            h.addHighlight(textArea.getText().indexOf(n)+n.indexOf(temp), textArea.getText().indexOf(n)+n.indexOf(temp)+temp.length(), new DefaultHighlighter.DefaultHighlightPainter(new Color(100, 1, 100))); // podswietlanie
+                            h.addHighlight(textArea.getText().indexOf(n)+n.indexOf(temp), textArea.getText().indexOf(n)+n.indexOf(temp)+temp.length(), new DefaultHighlighter.DefaultHighlightPainter(new Color(31, 233, 238))); // podswietlanie
+                            statusBarText.setText("Found text in area");
                         }catch(Exception es){
                             es.printStackTrace();
                         }

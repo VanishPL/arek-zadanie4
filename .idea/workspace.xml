@@ -25,14 +25,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="5888" />
-          <entry key="txt" value="312" />
+          <entry key="java" value="6406" />
+          <entry key="txt" value="370" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="5888" />
-          <entry key="PLAIN_TEXT" value="312" />
+          <entry key="JAVA" value="6406" />
+          <entry key="PLAIN_TEXT" value="370" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -52,8 +52,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Notepad.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="547">
-              <caret line="348" column="218" lean-forward="true" selection-start-line="348" selection-start-column="218" selection-end-line="348" selection-end-column="218" />
+            <state relative-caret-position="179">
+              <caret line="210" column="36" selection-start-line="210" selection-start-column="36" selection-end-line="210" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -98,6 +98,7 @@
     <findStrings>
       <find>textArea</find>
       <find>file</find>
+      <find>clip</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -146,7 +147,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549812043237" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549813681606" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop/Nowy folder/components-FileChooserDemo2Project" />
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.0" />
@@ -268,7 +269,14 @@
       <option name="project" value="LOCAL" />
       <updated>1549802203211</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Dodanie zaznacz wszystko i funkcje w oknie wyszukaj">
+      <created>1549812123449</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1549812123449</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -285,7 +293,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49946696" visible="true" weight="0.329718" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -313,7 +321,8 @@
     <MESSAGE value="Zrefakturyzwano kod. Klasa ChangeFamily nie istnieje." />
     <MESSAGE value="Dodano zmiane koloru czcionki oraz tla." />
     <MESSAGE value="Dodano okienko wyszukiwania bez jego funkcji" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dodano okienko wyszukiwania bez jego funkcji" />
+    <MESSAGE value="Dodanie zaznacz wszystko i funkcje w oknie wyszukaj" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dodanie zaznacz wszystko i funkcje w oknie wyszukaj" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Main.java" />
@@ -339,8 +348,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Notepad.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="547">
-          <caret line="348" column="218" lean-forward="true" selection-start-line="348" selection-start-column="218" selection-end-line="348" selection-end-column="218" />
+        <state relative-caret-position="179">
+          <caret line="210" column="36" selection-start-line="210" selection-start-column="36" selection-end-line="210" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
