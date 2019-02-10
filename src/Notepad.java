@@ -14,6 +14,8 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 import javax.swing.*;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.Highlighter;
 import javax.xml.soap.Text;
 
 public class Notepad extends JFrame {
@@ -92,6 +94,7 @@ public class Notepad extends JFrame {
         ChangeFont changeL = new ChangeFont();
         ChangeColor changeC = new ChangeColor();
         FindWord findL = new FindWord();
+        SelectAllListener selectAllL = new SelectAllListener();
         open.addActionListener(openL);
         newFile.addActionListener(NewL);
         save.addActionListener(saveL);
@@ -99,15 +102,22 @@ public class Notepad extends JFrame {
         font.addActionListener(changeL);
         colorChange.addActionListener(changeC);
         find.addActionListener(findL);
+        selectAll.addActionListener(selectAllL);
         //UndoListener UndoL = new UndoListener();
         PasteListener pasteL = new PasteListener(); // ustawienie nasluchiwacza wklejenia z clipboard
         //EditListener EditL = new EditListener();
         //SelectListener SelectL = new SelectListener();
         //undo.addActionListener(UndoL);
         //paste.addActionListener(EditL);
-        //selectAll.addActionListener(SelectL);
         frame.setSize(800, 600);
         frame.setVisible(true);
+    }
+
+    class SelectAllListener implements ActionListener {
+        public void actionPerformed(ActionEvent e){
+            textArea.setSelectionStart(0);
+            textArea.setSelectionEnd(textArea.getText().length());
+        }
     }
 
 
@@ -283,6 +293,7 @@ public class Notepad extends JFrame {
         JPanel comboPane, accCan;
         JTextArea textField;
         JButton acceptButton, cancelButton;
+        Highlighter h;
         public void actionPerformed(ActionEvent e){
             GridLayout gird = new GridLayout(2,1);
             GridLayout gird1 = new GridLayout(1,2);
@@ -319,22 +330,36 @@ public class Notepad extends JFrame {
 
         class WA extends WindowAdapter {
             public void windowClosing(WindowEvent e){
-                setVisible(false);
-                frame.setEnabled(true);
+                chan.setVisible(false);
+                h.removeAllHighlights();
             }
         }
 
         class Accept implements ActionListener {
             public void actionPerformed(ActionEvent e){
                 String temp = textField.getText();
+                h = textArea.getHighlighter();
+                String searchArea[] = textArea.getText().split(" ");
+                h.removeAllHighlights();
+                for(String n : searchArea){
+                    System.out.println(n);
+                    if(n.contains(temp)){
+                         System.out.println(n.indexOf(temp));
+                        try {
+                            h.addHighlight(textArea.getText().indexOf(n)+n.indexOf(temp), textArea.getText().indexOf(n)+n.indexOf(temp)+temp.length(), new DefaultHighlighter.DefaultHighlightPainter(new Color(100, 1, 100))); // podswietlanie
+                        }catch(Exception es){
+                            es.printStackTrace();
+                        }
+                    }
+                }
 
-                new WA();
             }
         }
 
         class Cancel implements ActionListener {
             public void actionPerformed(ActionEvent e){
-                new WA();
+                h.removeAllHighlights();
+                chan.setVisible(false);
             }
         }
     }
