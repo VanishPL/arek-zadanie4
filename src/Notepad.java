@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 import javax.swing.*;
+import javax.xml.soap.Text;
 
 public class Notepad extends JFrame {
 
@@ -86,11 +87,13 @@ public class Notepad extends JFrame {
         SaveListener saveL = new SaveListener();
         ExitListener exitL = new ExitListener();
         ChangeFont changeL = new ChangeFont();
+        ChangeColor changeC = new ChangeColor();
         open.addActionListener(openL);
         newFile.addActionListener(NewL);
         save.addActionListener(saveL);
         exit.addActionListener(exitL);
         font.addActionListener(changeL);
+        colorChange.addActionListener(changeC);
         //UndoListener UndoL = new UndoListener();
         PasteListener pasteL = new PasteListener(); // ustawienie nasluchiwacza wklejenia z clipboard
         //EditListener EditL = new EditListener();
@@ -184,7 +187,7 @@ public class Notepad extends JFrame {
             }
             catch(Exception exc)
             {
-                System.out.println("not string flavour");
+                System.out.println("Nie jest to tekst");
             }
 
         }
@@ -199,6 +202,7 @@ public class Notepad extends JFrame {
         SpinnerNumberModel model1 = new SpinnerNumberModel(12, 0, 60, 1);
         JSpinner size;
         JRadioButton radioButton;
+        Color newColor;
         int fontStyle, fontIndex;
         public void actionPerformed(ActionEvent e){
             GridLayout gird = new GridLayout(2,2);
@@ -207,17 +211,17 @@ public class Notepad extends JFrame {
             colorButton = new JButton("Change color");
             nes = new JComboBox<>(fonts);
             size = new JSpinner(model1);
-            radioButton = new JRadioButton("Bold");
+            radioButton = new JRadioButton("BOLD");
 
 
             frame.setEnabled(false);
 
 
-            chan.setLocation(getX()+100, getY()+100); // ustawianie kraftowego okna dialogowego
+            chan.setLocation(getX()+100, getY()+100); // ustawianie kraftowego okna dialogowego i jego rozmieszczenia
             chan.setSize(400, 200);
             chan.setVisible(true);
             chan.setLayout(gird);
-            chan.addWindowListener(new WA());
+            chan.addWindowListener(new WA()); //obsluga zdarzenia zamkniecia okna
 
 
             chan.add(nes);
@@ -226,11 +230,11 @@ public class Notepad extends JFrame {
             chan.add(radioButton);
 
             Bold bold = new Bold();
+            TextColorChange textColorChange = new TextColorChange();
 
             radioButton.addActionListener(bold);
+            colorButton.addActionListener(textColorChange);
 
-
-            //Color newColor = JColorChooser.showDialog(textArea, "Choose Background", textArea.getBackground());
         }
 
         class WA extends WindowAdapter {
@@ -238,11 +242,12 @@ public class Notepad extends JFrame {
                 setVisible(false);
                 fontS = new Font(fonts[nes.getSelectedIndex()], fontStyle, model1.getNumber().intValue());
                 textArea.setFont(fontS);
+                textArea.setForeground(newColor);
                 frame.setEnabled(true);
             }
         }
 
-        class Bold implements ActionListener {
+        class Bold implements ActionListener { //obsluga radio button - BOLD
             public void actionPerformed(ActionEvent e){
                 if(radioButton.isSelected()){
                     fontStyle = Font.BOLD;
@@ -252,8 +257,19 @@ public class Notepad extends JFrame {
             }
         }
 
+        class TextColorChange implements ActionListener {
+            public void actionPerformed(ActionEvent e){
+                newColor = JColorChooser.showDialog(textArea, "Choose Background", textArea.getBackground());
+            }
+        }
+
     }
 
+    class ChangeColor implements ActionListener {
+        public void actionPerformed(ActionEvent e){
+            textArea.setBackground(JColorChooser.showDialog(textArea, "Choose Background", textArea.getBackground()));
+        }
+    }
 
     public static void main(String args[]) {
         Notepad n = new Notepad();

@@ -25,14 +25,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="3328" />
-          <entry key="txt" value="44" />
+          <entry key="java" value="3870" />
+          <entry key="txt" value="224" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="3328" />
-          <entry key="PLAIN_TEXT" value="44" />
+          <entry key="JAVA" value="3870" />
+          <entry key="PLAIN_TEXT" value="224" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -52,8 +52,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Notepad.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2134">
-              <caret line="241" column="40" lean-forward="true" selection-start-line="241" selection-start-column="40" selection-end-line="241" selection-end-column="40" />
+            <state relative-caret-position="1959">
+              <caret line="269" column="118" selection-start-line="269" selection-start-column="118" selection-end-line="269" selection-end-column="118" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -142,7 +142,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549754225600" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549796305001" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop/Nowy folder/components-FileChooserDemo2Project" />
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.0" />
@@ -236,7 +236,21 @@
       <option name="project" value="LOCAL" />
       <updated>1549754225733</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Dodano zmiane czcionki jej rozmiaru i stylu">
+      <created>1549795195096</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1549795195096</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Zrefakturyzwano kod. Klasa ChangeFamily nie istnieje.">
+      <created>1549795314647</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1549795314647</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -277,14 +291,16 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Dodano zawijanie i przewijanie tekstu." />
-    <option name="LAST_COMMIT_MESSAGE" value="Dodano zawijanie i przewijanie tekstu." />
+    <MESSAGE value="Dodano zmiane czcionki jej rozmiaru i stylu" />
+    <MESSAGE value="Zrefakturyzwano kod. Klasa ChangeFamily nie istnieje." />
+    <option name="LAST_COMMIT_MESSAGE" value="Zrefakturyzwano kod. Klasa ChangeFamily nie istnieje." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Main.java" />
     <entry file="file://$PROJECT_DIR$/src/Notepad.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2134">
-          <caret line="241" column="40" lean-forward="true" selection-start-line="241" selection-start-column="40" selection-end-line="241" selection-end-column="40" />
+        <state relative-caret-position="1959">
+          <caret line="269" column="118" selection-start-line="269" selection-start-column="118" selection-end-line="269" selection-end-column="118" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
