@@ -226,10 +226,8 @@ public class Notepad extends JFrame {
             chan.add(radioButton);
 
             Bold bold = new Bold();
-            ChangeFamily changeFamily = new ChangeFamily();
 
             radioButton.addActionListener(bold);
-            nes.addActionListener(changeFamily);
 
 
             //Color newColor = JColorChooser.showDialog(textArea, "Choose Background", textArea.getBackground());
@@ -238,7 +236,7 @@ public class Notepad extends JFrame {
         class WA extends WindowAdapter {
             public void windowClosing(WindowEvent e){
                 setVisible(false);
-                fontS = new Font(fonts[fontIndex], fontStyle, model1.getNumber().intValue());
+                fontS = new Font(fonts[nes.getSelectedIndex()], fontStyle, model1.getNumber().intValue());
                 textArea.setFont(fontS);
                 frame.setEnabled(true);
             }
@@ -254,12 +252,6 @@ public class Notepad extends JFrame {
             }
         }
 
-        class ChangeFamily implements ActionListener {
-            public void actionPerformed(ActionEvent e){
-                fontIndex = nes.getSelectedIndex();
-                System.out.println(fonts[fontIndex]);
-            }
-        }
     }
 
 
