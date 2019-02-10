@@ -14,6 +14,8 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 import javax.swing.*;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
 import javax.xml.soap.Text;
@@ -36,15 +38,17 @@ public class Notepad extends JFrame {
     JScrollPane scrollArea;
     BorderLayout ns;
     Font fontS;
-    JTextField statusBarText;
+    JTextField statusBarText, countWords;
     final Clipboard clipboard =
             Toolkit.getDefaultToolkit().getSystemClipboard();
 
     Notepad() {
-        statusBar = new JPanel(new GridLayout(1,1));
-
+        statusBar = new JPanel(new GridLayout(1,2));
+        countWords = new JTextField();
         statusBarText = new JTextField();
+        countWords.setText("Words: ");
         statusBar.add(statusBarText);
+        statusBar.add(countWords);
         frame = new JFrame("Notepad Application");
         file = new JMenu("File");
         edit = new JMenu("Edit");
@@ -102,6 +106,7 @@ public class Notepad extends JFrame {
         FindWord findL = new FindWord();
         SelectAllListener selectAllL = new SelectAllListener();
         PasteListener pasteL = new PasteListener(); // ustawienie nasluchiwacza wklejenia z clipboard
+        CountWords countWordsL = new CountWords();
 
         open.addActionListener(openL);
         newFile.addActionListener(NewL);
@@ -112,6 +117,7 @@ public class Notepad extends JFrame {
         find.addActionListener(findL);
         selectAll.addActionListener(selectAllL);
         paste.addActionListener(pasteL);
+        textArea.addCaretListener(countWordsL);
         //UndoListener UndoL = new UndoListener();
 
         //EditListener EditL = new EditListener();
@@ -121,6 +127,14 @@ public class Notepad extends JFrame {
         statusBarText.setText("New Notepad");
         frame.setSize(800, 600);
         frame.setVisible(true);
+    }
+
+    class CountWords implements CaretListener {
+
+        @Override
+        public void caretUpdate(CaretEvent e) {
+            countWords.setText("Words: " + String.valueOf(textArea.getText().split(" ").length));
+        }
     }
 
     class SelectAllListener implements ActionListener {
