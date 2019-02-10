@@ -7,6 +7,7 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.event.*;
+import java.awt.geom.AffineTransform;
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.Scanner;
@@ -31,6 +32,7 @@ public class Notepad extends JFrame {
     JScrollPane scrollArea;
     Clipboard clip ;
     BorderLayout ns;
+    Font fontS;
 
     Notepad() {
         frame = new JFrame("Notepad Application");
@@ -197,6 +199,7 @@ public class Notepad extends JFrame {
         SpinnerNumberModel model1 = new SpinnerNumberModel(12, 0, 60, 1);
         JSpinner size;
         JRadioButton radioButton;
+        int fontStyle, fontIndex;
         public void actionPerformed(ActionEvent e){
             GridLayout gird = new GridLayout(2,2);
 
@@ -205,6 +208,7 @@ public class Notepad extends JFrame {
             nes = new JComboBox<>(fonts);
             size = new JSpinner(model1);
             radioButton = new JRadioButton("Bold");
+
 
             frame.setEnabled(false);
 
@@ -221,7 +225,12 @@ public class Notepad extends JFrame {
             chan.add(size);
             chan.add(radioButton);
 
-            radioButton.addActionListener();
+            Bold bold = new Bold();
+            ChangeFamily changeFamily = new ChangeFamily();
+
+            radioButton.addActionListener(bold);
+            nes.addActionListener(changeFamily);
+
 
             //Color newColor = JColorChooser.showDialog(textArea, "Choose Background", textArea.getBackground());
         }
@@ -229,7 +238,26 @@ public class Notepad extends JFrame {
         class WA extends WindowAdapter {
             public void windowClosing(WindowEvent e){
                 setVisible(false);
+                fontS = new Font(fonts[fontIndex], fontStyle, model1.getNumber().intValue());
+                textArea.setFont(fontS);
                 frame.setEnabled(true);
+            }
+        }
+
+        class Bold implements ActionListener {
+            public void actionPerformed(ActionEvent e){
+                if(radioButton.isSelected()){
+                    fontStyle = Font.BOLD;
+                }else{
+                    fontStyle = Font.PLAIN;
+                }
+            }
+        }
+
+        class ChangeFamily implements ActionListener {
+            public void actionPerformed(ActionEvent e){
+                fontIndex = nes.getSelectedIndex();
+                System.out.println(fonts[fontIndex]);
             }
         }
     }
