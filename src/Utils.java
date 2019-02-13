@@ -37,11 +37,11 @@ public class Utils {
 
     public static String getExtension(File f) {
         String ext = null;
-        String s = f.getName();
+        String s = f.getName();//pobranie nazwy pliku
         int i = s.lastIndexOf('.');
 
         if (i > 0 &&  i < s.length() - 1) {
-            ext = s.substring(i+1).toLowerCase();
+            ext = s.substring(i+1).toLowerCase(); //wyciagniecie rozszerzenia tekstu
         }
         return ext;
     }

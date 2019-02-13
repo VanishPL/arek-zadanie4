@@ -10,7 +10,7 @@ public class TextFilter extends FileFilter {
 
         String extension = Utils.getExtension(f);
         if (extension != null) {
-            if (extension.equals(Utils.txt)) return true;
+            if (extension.equals(Utils.txt)) return true; //jezeli nazwa pliku ma na koncu .txt to sie wyswietla jesli nie to nie
         }
 
         return false;
